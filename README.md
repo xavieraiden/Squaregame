@@ -22,3 +22,5 @@ Click "Import & Edit"
 ![image](https://user-images.githubusercontent.com/45552520/235678976-4ac7a055-060c-49f2-826c-b15d2545406d.png)
 
 Godot should automatically open the editor with everything loaded
+
+PS: I am terrible at code so some or all of it may be atrocious or badly commented
