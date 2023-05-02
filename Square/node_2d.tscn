@@ -1,0 +1,107 @@
+[gd_scene load_steps=17 format=3 uid="uid://dnm122hq3qjuo"]
+
+[ext_resource type="Script" path="res://Movement.gd" id="1_i3q5n"]
+[ext_resource type="Shader" path="res://node_2d.gdshader" id="1_mmxhq"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="2_6rqpp"]
+[ext_resource type="AudioStream" uid="uid://cmfhhjagiu1hh" path="res://lowbeep.mp3" id="4_r7eyb"]
+[ext_resource type="AudioStream" uid="uid://cokos47no67uy" path="res://beep.mp3" id="5_2u2y6"]
+[ext_resource type="Script" path="res://Label.gd" id="5_g3jwy"]
+[ext_resource type="Script" path="res://Enemy.gd" id="5_teova"]
+[ext_resource type="AudioStream" uid="uid://breahic4vw1s0" path="res://WhisperingSFX.mp3" id="6_kovco"]
+[ext_resource type="AudioStream" uid="uid://d3dwel2587waw" path="res://beep-high_B_major.wav" id="7_mqpwc"]
+[ext_resource type="AudioStream" uid="uid://c4c2ahtiy6yam" path="res://BuzzSFX.mp3" id="10_tsws7"]
+
+[sub_resource type="Gradient" id="Gradient_iylk2"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tg36f"]
+gradient = SubResource("Gradient_iylk2")
+width = 1
+height = 1
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.518349, 0.509174)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mv1af"]
+font_size = 13
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ud3av"]
+shader = ExtResource("1_mmxhq")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_npa3c"]
+width = 64
+height = 64
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2mwyf"]
+shader = ExtResource("1_mmxhq")
+
+[node name="Root" type="Node2D"]
+
+[node name="PlayerBeepJoiner" type="Node2D" parent="."]
+position = Vector2(50, 50)
+script = ExtResource("1_i3q5n")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="PlayerBeepJoiner"]
+current = true
+
+[node name="Player1Sprite" type="Sprite2D" parent="PlayerBeepJoiner"]
+scale = Vector2(1, 0.999999)
+texture = SubResource("GradientTexture2D_tg36f")
+script = ExtResource("2_6rqpp")
+
+[node name="BeepAudio" type="AudioStreamPlayer" parent="PlayerBeepJoiner"]
+stream = ExtResource("5_2u2y6")
+volume_db = -7.0
+
+[node name="LowBeepAudio" type="AudioStreamPlayer" parent="PlayerBeepJoiner"]
+stream = ExtResource("4_r7eyb")
+volume_db = -7.0
+
+[node name="Enemy" type="Node2D" parent="." node_paths=PackedStringArray("target_node")]
+position = Vector2(-5, 50)
+script = ExtResource("5_teova")
+FIXED_TIME_STEP_FRAMES = 200
+target_node = NodePath("../PlayerBeepJoiner")
+
+[node name="WhisperingAudio" type="AudioStreamPlayer2D" parent="Enemy"]
+stream = ExtResource("6_kovco")
+volume_db = -20.0
+pitch_scale = 0.53
+autoplay = true
+max_distance = 25.0
+attenuation = 1.56917
+panning_strength = 10.0
+
+[node name="EnemyBeepAudio" type="AudioStreamPlayer2D" parent="Enemy"]
+stream = ExtResource("7_mqpwc")
+max_distance = 100.0
+attenuation = 10.067
+panning_strength = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+
+[node name="CameraCRTJoiner" type="Node2D" parent="."]
+position = Vector2(50, 50)
+
+[node name="Label" type="Label" parent="CameraCRTJoiner"]
+offset_left = -50.0
+offset_top = -18.0
+offset_right = 50.0
+offset_bottom = 8.0
+text = "CLICK TO MOVE"
+label_settings = SubResource("LabelSettings_mv1af")
+horizontal_alignment = 1
+script = ExtResource("5_g3jwy")
+
+[node name="CRTEffect" type="Sprite2D" parent="CameraCRTJoiner"]
+material = SubResource("ShaderMaterial_ud3av")
+position = Vector2(4.76837e-07, 0)
+scale = Vector2(1.5625, 1.5625)
+texture = SubResource("NoiseTexture2D_npa3c")
+script = ExtResource("2_6rqpp")
+
+[node name="Camera2D" type="Camera2D" parent="CameraCRTJoiner"]
+material = SubResource("ShaderMaterial_2mwyf")
+
+[node name="BuzzAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_tsws7")
+autoplay = true
