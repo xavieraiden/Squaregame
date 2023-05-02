@@ -4,10 +4,11 @@ Open Source code for my game made in Godot engine: Square
 A game where you run from an Invisible enemy, with your only clue to their whereabouts being audio
 
 
-HOW TO IMPORT THE SOURCE CODE INTO GODOT:
-_______________________________________________________________________________________________________________
 
-You can import this into Godot by putting the Source code into a folder
+_______________________________________________________________________________________________________________
+"But how do I import the source code into godot?"
+
+You can import this into Godot by putting the Source code into a folder of your choice
 ![image](https://user-images.githubusercontent.com/45552520/235676961-2bf83cd1-75de-43c1-8b23-d242bd692c63.png)
 
 Open Godot and find the import option
