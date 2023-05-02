@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://dnm122hq3qjuo"]
+[gd_scene load_steps=21 format=3 uid="uid://dnm122hq3qjuo"]
 
 [ext_resource type="Script" path="res://Movement.gd" id="1_i3q5n"]
 [ext_resource type="Shader" path="res://node_2d.gdshader" id="1_mmxhq"]
+[ext_resource type="Script" path="res://Root.gd" id="1_tyy5d"]
 [ext_resource type="Script" path="res://Sprite2D.gd" id="2_6rqpp"]
 [ext_resource type="AudioStream" uid="uid://cmfhhjagiu1hh" path="res://lowbeep.mp3" id="4_r7eyb"]
 [ext_resource type="AudioStream" uid="uid://cokos47no67uy" path="res://beep.mp3" id="5_2u2y6"]
@@ -9,9 +10,12 @@
 [ext_resource type="Script" path="res://Enemy.gd" id="5_teova"]
 [ext_resource type="AudioStream" uid="uid://breahic4vw1s0" path="res://WhisperingSFX.mp3" id="6_kovco"]
 [ext_resource type="AudioStream" uid="uid://d3dwel2587waw" path="res://beep-high_B_major.wav" id="7_mqpwc"]
+[ext_resource type="Script" path="res://Mouse.gd" id="8_kad87"]
 [ext_resource type="AudioStream" uid="uid://c4c2ahtiy6yam" path="res://BuzzSFX.mp3" id="10_tsws7"]
 
 [sub_resource type="Gradient" id="Gradient_iylk2"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_tg36f"]
 gradient = SubResource("Gradient_iylk2")
@@ -20,6 +24,14 @@ height = 1
 use_hdr = true
 fill = 1
 fill_from = Vector2(0.518349, 0.509174)
+
+[sub_resource type="Gradient" id="Gradient_8m704"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lxrrn"]
+gradient = SubResource("Gradient_8m704")
+width = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_mv1af"]
 font_size = 13
@@ -35,6 +47,7 @@ height = 64
 shader = ExtResource("1_mmxhq")
 
 [node name="Root" type="Node2D"]
+script = ExtResource("1_tyy5d")
 
 [node name="PlayerBeepJoiner" type="Node2D" parent="."]
 position = Vector2(50, 50)
@@ -43,7 +56,7 @@ script = ExtResource("1_i3q5n")
 [node name="AudioListener2D" type="AudioListener2D" parent="PlayerBeepJoiner"]
 current = true
 
-[node name="Player1Sprite" type="Sprite2D" parent="PlayerBeepJoiner"]
+[node name="PlayerSprite" type="Sprite2D" parent="PlayerBeepJoiner"]
 scale = Vector2(1, 0.999999)
 texture = SubResource("GradientTexture2D_tg36f")
 script = ExtResource("2_6rqpp")
@@ -77,7 +90,10 @@ max_distance = 100.0
 attenuation = 10.067
 panning_strength = 100.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+[node name="Mouse" type="Sprite2D" parent="."]
+position = Vector2(50, 50)
+texture = SubResource("GradientTexture1D_lxrrn")
+script = ExtResource("8_kad87")
 
 [node name="CameraCRTJoiner" type="Node2D" parent="."]
 position = Vector2(50, 50)
