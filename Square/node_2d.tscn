@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dnm122hq3qjuo"]
+[gd_scene load_steps=22 format=3 uid="uid://dnm122hq3qjuo"]
 
 [ext_resource type="Script" path="res://Movement.gd" id="1_i3q5n"]
 [ext_resource type="Shader" path="res://node_2d.gdshader" id="1_mmxhq"]
@@ -8,9 +8,9 @@
 [ext_resource type="AudioStream" uid="uid://cokos47no67uy" path="res://beep.mp3" id="5_2u2y6"]
 [ext_resource type="Script" path="res://Label.gd" id="5_g3jwy"]
 [ext_resource type="Script" path="res://Enemy.gd" id="5_teova"]
-[ext_resource type="AudioStream" uid="uid://breahic4vw1s0" path="res://WhisperingSFX.mp3" id="6_kovco"]
 [ext_resource type="AudioStream" uid="uid://d3dwel2587waw" path="res://beep-high_B_major.wav" id="7_mqpwc"]
 [ext_resource type="Script" path="res://Mouse.gd" id="8_kad87"]
+[ext_resource type="Script" path="res://Scorecounter.gd" id="10_j8xv2"]
 [ext_resource type="AudioStream" uid="uid://c4c2ahtiy6yam" path="res://BuzzSFX.mp3" id="10_tsws7"]
 
 [sub_resource type="Gradient" id="Gradient_iylk2"]
@@ -32,6 +32,9 @@ colors = PackedColorArray(1, 1, 1, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_lxrrn"]
 gradient = SubResource("Gradient_8m704")
 width = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_y4s64"]
+font_size = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_mv1af"]
 font_size = 13
@@ -75,15 +78,6 @@ script = ExtResource("5_teova")
 FIXED_TIME_STEP_FRAMES = 200
 target_node = NodePath("../PlayerBeepJoiner")
 
-[node name="WhisperingAudio" type="AudioStreamPlayer2D" parent="Enemy"]
-stream = ExtResource("6_kovco")
-volume_db = -20.0
-pitch_scale = 0.53
-autoplay = true
-max_distance = 25.0
-attenuation = 1.56917
-panning_strength = 10.0
-
 [node name="EnemyBeepAudio" type="AudioStreamPlayer2D" parent="Enemy"]
 stream = ExtResource("7_mqpwc")
 max_distance = 100.0
@@ -98,7 +92,15 @@ script = ExtResource("8_kad87")
 [node name="CameraCRTJoiner" type="Node2D" parent="."]
 position = Vector2(50, 50)
 
-[node name="Label" type="Label" parent="CameraCRTJoiner"]
+[node name="Scorecounter" type="Label" parent="CameraCRTJoiner"]
+offset_left = -46.0
+offset_top = -46.0
+offset_right = -6.0
+offset_bottom = -23.0
+label_settings = SubResource("LabelSettings_y4s64")
+script = ExtResource("10_j8xv2")
+
+[node name="InstructionsLabel" type="Label" parent="CameraCRTJoiner"]
 offset_left = -50.0
 offset_top = -18.0
 offset_right = 50.0
